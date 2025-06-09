@@ -52,6 +52,7 @@ export default function ProjectsPage() {
                   </span>
                   <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
                 </Link>
+                {project.github && 
                 <Link
                   href={project.github}
                   className="inline-flex group items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -63,6 +64,7 @@ export default function ProjectsPage() {
                   </span>
                   <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
                 </Link>
+                }
               </div>
               <div className="mt-8 border-b border-border" />
             </motion.div>
