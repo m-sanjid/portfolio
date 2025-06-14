@@ -18,7 +18,7 @@ const PageHeader = ({
         <ArrowLeft className="mr-2 h-4 w-4" />
         <span>Back to home</span>
       </Link>
-      <h1 className="font-serif text-3xl">{title}</h1>
+      <h1 className="text-lg">{title}</h1>
       <p className="text-muted-foreground">{description}</p>
     </div>
   );
