@@ -11,7 +11,7 @@ export default function ProjectsPage() {
   const [hovered, setHovered] = useState<number | null>(null);
   return (
     <div className="mx-auto max-w-2xl px-4 py-20">
-      <div className="space-y-2">
+      <div className="space-y-8">
         <PageHeader
           title="Projects"
           description="A collection of projects I've worked on."
@@ -28,7 +28,7 @@ export default function ProjectsPage() {
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(null)}
             >
-              <h2 className="font-serif text-xl">{project.title}</h2>
+              <h2 className="text-lg">{project.title}</h2>
               <p className="text-muted-foreground">{project.description}</p>
               <div className="flex flex-wrap gap-2">
                 {project.tech.map((tech) => (
@@ -43,7 +43,7 @@ export default function ProjectsPage() {
               <div className="flex items-center gap-4">
                 <Link
                   href={project.link}
-                  className="inline-flex group items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="group inline-flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -52,19 +52,19 @@ export default function ProjectsPage() {
                   </span>
                   <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
                 </Link>
-                {project.github && 
-                <Link
-                  href={project.github}
-                  className="inline-flex group items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="underline decoration-dashed underline-offset-4">
-                    View code
-                  </span>
-                  <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
-                </Link>
-                }
+                {project.github && (
+                  <Link
+                    href={project.github}
+                    className="group inline-flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="underline decoration-dashed underline-offset-4">
+                      View code
+                    </span>
+                    <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                  </Link>
+                )}
               </div>
               <div className="mt-8 border-b border-border" />
             </motion.div>

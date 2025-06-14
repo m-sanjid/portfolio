@@ -24,10 +24,10 @@ const ProjectsSection = () => {
             className="group space-y-4"
           >
             <Link target="_blank" rel="noopener noreferrer" href={project.link}>
-              <h2 className="mt-4 font-serif text-lg md:mt-8">
-                {project.title}
-              </h2>
-              <p className="text-muted-foreground">{project.description}</p>
+              <h2 className="mb-1 mt-4 md:mt-8 md:text-lg">{project.title}</h2>
+              <p className="text-sm font-light text-muted-foreground md:text-base">
+                {project.description}
+              </p>
               <div className="flex flex-wrap gap-2">
                 {project.tech.map((tech) => (
                   <span
@@ -38,7 +38,7 @@ const ProjectsSection = () => {
                   </span>
                 ))}
               </div>
-              <div className="mt-2 flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground">
+              <div className="mt-2 flex items-center text-xs text-muted-foreground transition-colors hover:text-foreground">
                 <span className="underline decoration-dashed underline-offset-4">
                   View project
                 </span>

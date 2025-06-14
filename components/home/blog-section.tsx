@@ -28,11 +28,13 @@ const BlogSection = async () => {
                 href={`/blog/${post.slug}`}
                 className="group space-y-4 border-b pb-4"
               >
-                <h2 className="relative mt-4 font-serif text-lg md:mt-8">
+                <h2 className="relative mb-1 mt-4 md:mt-8 md:text-lg">
                   {post.title}
                   <ArrowRight className="absolute right-0 top-2 ml-1 size-4 opacity-0 transition-transform group-hover:translate-x-1 group-hover:opacity-100" />
                 </h2>
-                <p className="text-muted-foreground">{post.description}</p>
+                <p className="text-sm font-light text-muted-foreground md:text-base">
+                  {post.description}
+                </p>
               </Link>
             ))}
           </MotionDiv>

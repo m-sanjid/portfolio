@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Link } from "next-view-transitions";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 
 const LinksSection = () => {
@@ -15,23 +15,20 @@ const LinksSection = () => {
       title: "Blog",
       href: "/blog",
     },
-//   ];
-// const social = [
-
-  {
-    title: "GitHub",
-    href: "https://github.com/m-sanjid",
-    isSocial:true
-  },
-  {
-    title: "X",
-    href: "https://x.com/dev_sanjid",
-    isSocial:true
-  },
-]
+    {
+      title: "GitHub",
+      href: "https://github.com/m-sanjid",
+      isSocial: true,
+    },
+    {
+      title: "X",
+      href: "https://x.com/dev_sanjid",
+      isSocial: true,
+    },
+  ];
   return (
     <div className="space-y-4">
-      <h2 className="font-serif text-xl">Links</h2>
+      <h2 className="text-lg">Links</h2>
       <ul className="space-y-2">
         {links.map((link, index) => (
           <motion.li
@@ -41,27 +38,34 @@ const LinksSection = () => {
             viewport={{ amount: 0.1, once: true }}
             key={link.title}
           >
-            {link.isSocial?
-            <Link href={link.href}
-            target="_blank"
-            className="group flex items-center text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <ArrowRight className="mr-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              <span className="underline decoration-dashed underline-offset-4">
-                {link.title}
-              </span>
-            </Link>
-            :
-            <Link
-              href={link.href}
-              className="group flex items-center text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <ArrowRight className="mr-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              <span className="underline decoration-dashed underline-offset-4">
-                {link.title}
-              </span>
-            </Link>
-            }
+            {link.isSocial ? (
+              <Link
+                href={link.href}
+                target="_blank"
+                className="group flex items-center text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <span className="text-xs underline decoration-dashed underline-offset-4 md:text-sm">
+                  {link.title}
+                </span>
+                <ArrowUpRight
+                  strokeWidth={1.5}
+                  className="mr-2 h-3 w-3 opacity-0 transition-transform duration-200 ease-in-out group-hover:translate-x-1 group-hover:opacity-100"
+                />
+              </Link>
+            ) : (
+              <Link
+                href={link.href}
+                className="group flex items-center text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <span className="text-xs underline decoration-dashed underline-offset-4 md:text-sm">
+                  {link.title}
+                </span>
+                <ArrowRight
+                  strokeWidth={1.5}
+                  className="mr-2 h-3 w-3 opacity-0 transition-transform duration-200 ease-in-out group-hover:translate-x-1 group-hover:opacity-100"
+                />
+              </Link>
+            )}
           </motion.li>
         ))}
       </ul>

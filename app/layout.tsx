@@ -43,7 +43,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Navigation />
-            <main className="pt-16">{children}</main>
+            <main>{children}</main>
           </ThemeProvider>
         </body>
       </html>
