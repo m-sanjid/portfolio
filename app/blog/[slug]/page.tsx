@@ -51,7 +51,7 @@ export default async function BlogPost({
         <header className="mb-8">
           <h1 className="mb-4 text-4xl font-bold">{frontmatter.title}</h1>
           <p className="mb-4 text-lg">{frontmatter.description}</p>
-          <div className="flex items-center gap-4 text-sm text-gray-500">
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <time dateTime={frontmatter.date}>
               {new Date(frontmatter.date).toLocaleDateString("en-us", {
                 weekday: "long",
@@ -63,7 +63,10 @@ export default async function BlogPost({
             {frontmatter.tags && (
               <div className="flex gap-2">
                 {frontmatter.tags.map((tag) => (
-                  <span key={tag} className="rounded-full px-2 py-1">
+                  <span
+                    key={tag}
+                    className="rounded-md border bg-primary/5 px-2 py-1 text-xs backdrop-blur-md"
+                  >
                     {tag}
                   </span>
                 ))}

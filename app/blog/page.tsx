@@ -14,22 +14,21 @@ export default async function BlogPage() {
           description="Thoughts, tutorials, and insights about web development."
         />
 
-        {/* Divider */}
-        <div className="border-t border-border" />
-
         {/* Blog posts list */}
         <div className="space-y-12">
           {blogPosts.map((post, index) => (
-            <div
+            <Link
               key={post.slug}
-              className="animate-fade-in space-y-2"
-              style={{ animationDelay: `${index * 100}ms` }}
+              href={`/blog/${post.slug}`}
+              className="group block pb-4 border-b"
             >
-              <Link href={`/blog/${post.slug}`} className="group block">
-                <h2 className="font-serif text-xl transition-colors group-hover:text-primary">
+              <div
+                className="animate-fade-in space-y-2"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <h2 className="text-lg transition-colors group-hover:text-primary">
                   {post.title}
                 </h2>
-              </Link>
               <p className="text-muted-foreground">{post.description}</p>
               <div className="flex items-center text-sm text-muted-foreground">
                 <span>
@@ -41,15 +40,22 @@ export default async function BlogPage() {
                     })}
                 </span>
                 <span className="mx-2">•</span>
-                <span>{post.description}</span>
+                <div className="flex gap-2">
+                  {post.tags?.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-md border bg-primary/5 px-2 py-px text-xs backdrop-blur-md"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-              {index < blogPosts.length - 1 && (
-                <div className="mt-8 border-t border-border" />
-              )}
             </div>
+          </Link>
           ))}
-        </div>
       </div>
+    </div>
     </div>
   );
 }
