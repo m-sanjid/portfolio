@@ -28,8 +28,14 @@ export default function ProjectsPage() {
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(null)}
             >
-              <h2 className="text-lg">{project.title}</h2>
-              <p className="text-muted-foreground">{project.description}</p>
+              <Link
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h2 className="text-lg">{project.title}</h2>
+                <p className="text-muted-foreground">{project.description}</p>
+              </Link>
               <div className="flex flex-wrap gap-2">
                 {project.tech.map((tech) => (
                   <span

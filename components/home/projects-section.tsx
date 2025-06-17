@@ -2,7 +2,7 @@ import React from "react";
 import { projects } from "@/constants/projects";
 import SectionHeader from "@/components/section-header";
 import { ArrowUpRight } from "lucide-react";
-import MotionDiv from "../motion-div";
+import MotionDiv from "@/components/motion-div";
 import { Link } from "next-view-transitions";
 
 const ProjectsSection = () => {
@@ -13,7 +13,6 @@ const ProjectsSection = () => {
         title="Projects"
         description="A collection of projects I've worked on."
       />
-      <div className="border-t border-border" />
       <div className="space-y-8">
         {project.map((project, index) => (
           <MotionDiv
@@ -21,9 +20,14 @@ const ProjectsSection = () => {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
             key={project.title}
-            className="group space-y-4"
+            className="group"
           >
-            <Link target="_blank" rel="noopener noreferrer" href={project.link}>
+            <Link
+              target="_blank"
+              rel="noopener noreferrer"
+              href={project.link}
+              className="space-y-4"
+            >
               <h2 className="mb-1 mt-4 md:mt-8 md:text-lg">{project.title}</h2>
               <p className="text-sm font-light text-muted-foreground md:text-base">
                 {project.description}
