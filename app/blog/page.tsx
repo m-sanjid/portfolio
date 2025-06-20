@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { getAllBlogs } from "@/utils/mdx";
+import { getAllBlogs } from "@/utils/mdx-server";
 import PageHeader from "@/components/page-header";
 
 export default async function BlogPage() {

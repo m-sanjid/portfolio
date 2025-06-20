@@ -13,9 +13,9 @@ export default function BlogPostLayout({
         <div>
           <Link
             href="/blog"
-            className="flex items-center text-muted-foreground transition-colors duration-100 ease-in-out hover:text-primary"
+            className="group flex items-center text-xs text-muted-foreground transition-colors duration-100 ease-in-out hover:text-primary md:text-sm"
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
+            <ArrowLeft className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             <span>Back to all posts</span>
           </Link>
         </div>

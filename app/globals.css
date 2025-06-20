@@ -59,14 +59,6 @@
       "rlig" 1,
       "calt" 1;
   }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-serif;
-  }
 }
 
 /* Custom animations */
@@ -96,19 +88,19 @@ html {
 }
 
 .prose h1 {
-  @apply mb-6 font-serif text-3xl text-foreground;
+  @apply mb-6 text-2xl text-foreground;
 }
 
 .prose h2 {
-  @apply mb-4 mt-8 font-serif text-2xl text-foreground;
+  @apply mb-4 mt-8 text-xl text-foreground;
 }
 
 .prose h3 {
-  @apply mb-3 mt-6 font-serif text-xl text-foreground;
+  @apply mb-3 mt-6 text-xl text-foreground;
 }
 
 .prose p {
-  @apply mb-4 leading-relaxed text-foreground;
+  @apply mb-4 text-xs md:text-sm leading-relaxed text-foreground;
 }
 
 .prose a {
@@ -120,7 +112,7 @@ html {
 }
 
 .prose li {
-  @apply mb-2 text-foreground;
+  @apply mb-2 text-xs md:text-sm text-foreground;
 }
 
 .prose blockquote {
