@@ -1,0 +1,293 @@
+---
+title: "3D Card"
+description: "Interactive 3D card that follows mouse movement"
+category: "interaction"
+---
+
+import { ComponentShowcase } from "@/components/component-showcase";
+import { ComponentPreview } from "@/components/ComponentPreview";
+import { PropsTable } from "@/components/props-table";
+
+<ComponentShowcase preview={<ComponentPreview name="3d-card" />} code={`import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { Card } from "@/components/ui/card";
+
+export default function ThreeDCardDemo() {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["17.5deg", "-17.5deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-17.5deg", "17.5deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      whileHover={{ scale: 1.02 }}
+      className="relative h-96 w-72"
+    >
+      <Card className="relative h-full w-full p-8">
+        <div
+          style={{
+            transform: "translateZ(75px)",
+            transformStyle: "preserve-3d",
+          }}
+        >
+          <h3 className="text-2xl font-bold">3D Card</h3>
+          <p className="mt-4 text-muted-foreground">
+            Move your mouse over this card to see it rotate in 3D space.
+            The card follows your cursor movement with smooth spring animations.
+          </p>
+        </div>
+        <div
+          className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5"
+          style={{
+            transform: "translateZ(50px)",
+            transformStyle: "preserve-3d",
+          }}
+        />
+      </Card>
+    </motion.div>
+  );
+}`} />
+
+# 3D Card
+
+An immersive 3D card component that responds to mouse movement, creating a realistic depth effect. Perfect for showcasing products, profiles, or any content that benefits from interactive 3D presentation.
+
+## Features
+
+- **Mouse Tracking**: Follows cursor movement for realistic 3D effect
+- **Smooth Animations**: Fluid transitions and responsive interactions
+- **Depth Perception**: Realistic lighting and shadow effects
+- **Customizable**: Easy to modify colors, depth, and animation sensitivity
+- **Responsive**: Works perfectly on all screen sizes
+- **Performance Optimized**: Efficient mouse tracking and rendering
+
+## Installation
+
+```bash
+npm install framer-motion lucide-react
+```
+
+## Basic Usage
+
+```tsx
+import { ThreeDCard } from '@/components/3d-card';
+
+function MyComponent() {
+  return (
+    <ThreeDCard>
+      <div className="p-6">
+        <h3>3D Card Title</h3>
+        <p>This card responds to mouse movement!</p>
+      </div>
+    </ThreeDCard>
+  );
+}
+```
+
+## Props
+
+<PropsTable props={[
+  { name: "children", type: "ReactNode", description: "Content to display inside the card" },
+  { name: "depth", type: "number", defaultValue: "20", description: "Maximum rotation depth in degrees" },
+  { name: "sensitivity", type: "number", defaultValue: "0.5", description: "Mouse movement sensitivity" },
+  { name: "className", type: "string", description: "Additional CSS classes" },
+  { name: "onHover", type: "function", description: "Callback when card is hovered" },
+]} />
+
+## Examples
+
+### Basic 3D Card
+
+```tsx
+<ThreeDCard>
+  <div className="p-8 text-center">
+    <h3 className="text-2xl font-bold mb-4">Product Name</h3>
+    <p className="text-neutral-600">Amazing product description</p>
+    <Button className="mt-4">Learn More</Button>
+  </div>
+</ThreeDCard>
+```
+
+### Profile Card
+
+```tsx
+<ThreeDCard depth={30} sensitivity={0.8}>
+  <div className="p-6 text-center">
+    <img 
+      src="/avatar.jpg" 
+      alt="Profile" 
+      className="w-24 h-24 rounded-full mx-auto mb-4" 
+    />
+    <h3 className="text-xl font-bold">John Doe</h3>
+    <p className="text-neutral-600">Software Developer</p>
+    <div className="flex justify-center gap-2 mt-4">
+      <Button variant="outline" size="sm">Follow</Button>
+      <Button size="sm">Message</Button>
+    </div>
+  </div>
+</ThreeDCard>
+```
+
+### Product Showcase
+
+```tsx
+<ThreeDCard>
+  <div className="relative overflow-hidden rounded-xl">
+    <img 
+      src="/product.jpg" 
+      alt="Product" 
+      className="w-full h-48 object-cover" 
+    />
+    <div className="p-6">
+      <h3 className="text-xl font-bold">Premium Product</h3>
+      <p className="text-neutral-600 mt-2">High-quality product with amazing features</p>
+      <div className="flex items-center justify-between mt-4">
+        <span className="text-2xl font-bold">$99.99</span>
+        <Button>Add to Cart</Button>
+      </div>
+    </div>
+  </div>
+</ThreeDCard>
+```
+
+## Customization
+
+### Custom Depth and Sensitivity
+
+```tsx
+<ThreeDCard depth={45} sensitivity={1.2}>
+  <div className="p-6">
+    <h3>High Sensitivity Card</h3>
+    <p>This card has increased depth and sensitivity.</p>
+  </div>
+</ThreeDCard>
+```
+
+### Custom Styling
+
+```tsx
+<ThreeDCard className="bg-gradient-to-br from-purple-500 to-pink-500 text-white">
+  <div className="p-6">
+    <h3>Gradient 3D Card</h3>
+    <p>This card has a beautiful gradient background.</p>
+  </div>
+</ThreeDCard>
+```
+
+### With Hover Callback
+
+```tsx
+<ThreeDCard onHover={(isHovered) => console.log('Card hovered:', isHovered)}>
+  <div className="p-6">
+    <h3>Interactive Card</h3>
+    <p>This card tracks hover state.</p>
+  </div>
+</ThreeDCard>
+```
+
+## Advanced Usage
+
+### Multiple 3D Cards
+
+```tsx
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <ThreeDCard>
+    <div className="p-6">
+      <h3>Card 1</h3>
+      <p>First 3D card</p>
+    </div>
+  </ThreeDCard>
+  <ThreeDCard>
+    <div className="p-6">
+      <h3>Card 2</h3>
+      <p>Second 3D card</p>
+    </div>
+  </ThreeDCard>
+  <ThreeDCard>
+    <div className="p-6">
+      <h3>Card 3</h3>
+      <p>Third 3D card</p>
+    </div>
+  </ThreeDCard>
+</div>
+```
+
+### With Custom Animations
+
+```tsx
+import { motion } from 'framer-motion';
+
+<ThreeDCard>
+  <motion.div 
+    className="p-6"
+    whileHover={{ scale: 1.05 }}
+    transition={{ duration: 0.2 }}
+  >
+    <h3>Animated Content</h3>
+    <p>This content has additional animations.</p>
+  </motion.div>
+</ThreeDCard>
+```
+
+## Best Practices
+
+1. **Appropriate Content**: Use for content that benefits from 3D presentation
+2. **Performance**: Avoid heavy content that might affect performance
+3. **Accessibility**: Ensure content is accessible when 3D effects are disabled
+4. **Mobile Consideration**: Test on touch devices for optimal experience
+5. **Depth Balance**: Don't use excessive depth that might cause motion sickness
+
+## Accessibility
+
+- **Reduced Motion**: Respects `prefers-reduced-motion` media query
+- **Keyboard Navigation**: Works with keyboard navigation
+- **Screen Readers**: Proper ARIA labels and semantic structure
+- **Focus Management**: Clear focus indicators
+
+## Performance Tips
+
+1. **Debounced Mouse Events**: Use debounced mouse tracking for better performance
+2. **CSS Transforms**: Leverage hardware acceleration with CSS transforms
+3. **Optimized Rendering**: Avoid unnecessary re-renders
+4. **Touch Optimization**: Optimize for touch devices
+
+## Troubleshooting
+
+### Card not responding to mouse?
+Check if the mouse tracking is properly implemented and the component is mounted.
+
+### Performance issues?
+Consider reducing the sensitivity or depth for better performance on low-end devices.
+
+### Styling conflicts?
+Ensure no conflicting CSS is affecting the 3D transforms.
+
+### Mobile issues?
+Test touch interactions and consider adding touch-specific optimizations. 
