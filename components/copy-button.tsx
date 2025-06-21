@@ -1,30 +1,34 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { toast } from "sonner"
-import { Copy, Check } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState } from "react";
+import { toast } from "sonner";
+import { Copy, Check } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const CopyButton = ({ text }: { text: string }) => {
-  const [isCopied, setIsCopied] = useState(false)
+  const [isCopied, setIsCopied] = useState(false);
 
   const handleCopyCode = async () => {
     try {
-      await navigator.clipboard.writeText(text)
-      setIsCopied(true)
-      toast.success("Code copied to clipboard!")
-      setTimeout(() => setIsCopied(false), 2000)
+      await navigator.clipboard.writeText(text);
+      setIsCopied(true);
+      toast.success("Code copied to clipboard!");
+      setTimeout(() => setIsCopied(false), 2000);
     } catch (err) {
-      toast.error("Failed to copy code")
+      toast.error("Failed to copy code");
     }
-  }
+  };
 
   return (
     <motion.button
       onClick={handleCopyCode}
       whileTap={{ scale: 0.95 }}
       layout
-      className="absolute top-4 right-4 z-10 rounded-md border bg-background px-3 py-1.5 shadow-md hover:bg-muted/50 transition-colors"
+      className="absolute right-1 top-1 z-10 rounded-md border bg-background px-3 py-1.5 shadow-md transition-colors hover:bg-muted/50"
+      aria-label={
+        isCopied ? "Code copied to clipboard" : "Copy code to clipboard"
+      }
+      aria-pressed={isCopied}
     >
       <AnimatePresence mode="wait" initial={false}>
         {isCopied ? (
@@ -37,7 +41,7 @@ export const CopyButton = ({ text }: { text: string }) => {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className="flex items-center gap-1.5 text-green-500"
           >
-            <Check className="h-4 w-4" />
+            <Check className="h-4 w-4" aria-hidden="true" />
             <span className="text-sm">Copied</span>
           </motion.div>
         ) : (
@@ -50,11 +54,11 @@ export const CopyButton = ({ text }: { text: string }) => {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className="flex items-center gap-1.5"
           >
-            <Copy className="h-4 w-4" />
+            <Copy className="h-4 w-4" aria-hidden="true" />
             <span className="text-sm">Copy</span>
           </motion.div>
         )}
       </AnimatePresence>
     </motion.button>
-  )
-}
+  );
+};

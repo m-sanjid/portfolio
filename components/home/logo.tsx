@@ -3,7 +3,11 @@ import { Link } from "next-view-transitions";
 
 const Logo = () => {
   return (
-    <Link href="/" className="transition-colors hover:text-primary">
+    <Link
+      href="/"
+      className="transition-colors hover:text-primary"
+      aria-label="Go to homepage"
+    >
       <h2 className="text-lg font-extrabold">MS</h2>
     </Link>
   );

@@ -1,15 +1,17 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Button } from "@/components/ui/button"
-
-
+import { cn } from "@/lib/utils";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { Button } from "@/components/ui/button";
 
 interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {
-  expandButtonTitle?: string
+  expandButtonTitle?: string;
 }
 
 export function CodeBlockWrapper({
@@ -18,7 +20,7 @@ export function CodeBlockWrapper({
   children,
   ...props
 }: CodeBlockProps) {
-  const [isOpened, setIsOpened] = React.useState(false)
+  const [isOpened, setIsOpened] = React.useState(false);
 
   return (
     <Collapsible open={isOpened} onOpenChange={setIsOpened}>
@@ -30,7 +32,7 @@ export function CodeBlockWrapper({
           <div
             className={cn(
               "[&_pre]:my-0 [&_pre]:max-h-[650px] [&_pre]:pb-[100px]",
-              !isOpened ? "[&_pre]:overflow-hidden" : "[&_pre]:overflow-auto]"
+              !isOpened ? "[&_pre]:overflow-hidden" : "[&_pre]:overflow-auto]",
             )}
           >
             {children}
@@ -39,7 +41,7 @@ export function CodeBlockWrapper({
         <div
           className={cn(
             "absolute flex items-center justify-center bg-gradient-to-b from-zinc-700/30 to-zinc-950/90 p-2",
-            isOpened ? "inset-x-0 bottom-0 h-12" : "inset-0"
+            isOpened ? "inset-x-0 bottom-0 h-12" : "inset-0",
           )}
         >
           <CollapsibleTrigger asChild>
@@ -50,5 +52,5 @@ export function CodeBlockWrapper({
         </div>
       </div>
     </Collapsible>
-  )
+  );
 }

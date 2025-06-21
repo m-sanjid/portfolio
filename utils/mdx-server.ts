@@ -92,7 +92,9 @@ export const getSingleBlog = async (slug: string) => {
 
 export const getAllBlogs = async () => {
   try {
-    const files = await fs.promises.readdir(path.join(process.cwd(), "content/blog"));
+    const files = await fs.promises.readdir(
+      path.join(process.cwd(), "content/blog"),
+    );
     const allBlogs = await Promise.all(
       files.map(async (file) => {
         const slug = file.replace(/\.mdx$/, "");
@@ -127,7 +129,11 @@ export const getBlogFrontmatterBySlug = async (slug: string) => {
 };
 
 export const getComponentFrontmatterBySlug = async (slug: string) => {
-  const filePath = path.join(process.cwd(), "content/components", `${slug}.mdx`);
+  const filePath = path.join(
+    process.cwd(),
+    "content/components",
+    `${slug}.mdx`,
+  );
   const fileContents = await fs.promises.readFile(filePath, "utf8");
   if (!fileContents) {
     return null;

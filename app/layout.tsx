@@ -5,6 +5,9 @@ import "./globals.css";
 import Navigation from "@/components/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ViewTransitions } from "next-view-transitions";
+import BottomNav from "@/components/bottom-nav";
+import { Toaster } from "sonner";
+import { TopBlur } from "@/components/top-blur";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,8 +45,25 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            {/* Skip to main content link for screen readers */}
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            >
+              Skip to main content
+            </a>
+
+            <Toaster />
             <Navigation />
-            <main>{children}</main>
+            <TopBlur count={6} />
+            <main
+              id="main-content"
+              className="mx-auto max-w-2xl py-10"
+              role="main"
+            >
+              {children}
+            </main>
+            <BottomNav />
           </ThemeProvider>
         </body>
       </html>

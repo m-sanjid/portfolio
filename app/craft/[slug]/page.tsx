@@ -1,5 +1,9 @@
 import { ComponentsRegistry } from "@/components/registry";
-import { getComponentBySlug, getComponentFrontmatterBySlug, getComponentList } from "@/utils/mdx-server";
+import {
+  getComponentBySlug,
+  getComponentFrontmatterBySlug,
+  getComponentList,
+} from "@/utils/mdx-server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
 export async function generateStaticParams() {
@@ -29,24 +33,28 @@ export const generateMetadata = async ({
   };
 };
 
-export default async function ComponentDetail({ params }: { params: { slug: string } }) {
+export default async function ComponentDetail({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const paramsValue = await params;
   const { slug } = paramsValue;
   const { meta, code } = await getComponentBySlug(slug);
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className="min-h-screen bg-background">
       <article className="container mx-auto px-4 py-8 lg:py-16">
         <div className="mb-12 text-center">
-          <h1 className="text-foreground text-4xl font-bold tracking-tight sm:text-5xl">
+          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
             {meta.title}
           </h1>
-          <p className="text-muted-foreground mt-4 text-lg">
+          <p className="mt-4 text-lg text-muted-foreground">
             {meta.description}
           </p>
         </div>
         <div className="mx-auto max-w-4xl">
-          <div className="prose prose-lg dark:prose-invert prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-primary hover:prose-a:text-primary/80 prose-pre:bg-muted prose-pre:text-muted-foreground prose-pre:rounded-lg prose-pre:p-4 prose-img:rounded-lg prose-img:shadow-md">
+          <div className="prose prose-lg dark:prose-invert prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-primary hover:prose-a:text-primary/80 prose-pre:rounded-lg prose-pre:bg-muted prose-pre:p-4 prose-pre:text-muted-foreground prose-img:rounded-lg prose-img:shadow-md">
             <MDXRemote source={code} components={ComponentsRegistry} />
           </div>
         </div>

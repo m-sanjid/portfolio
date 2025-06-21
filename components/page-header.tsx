@@ -47,11 +47,14 @@ const PageHeader = ({
         </Link>
       </motion.div>
 
-      <motion.h1 variants={childVariants} className="text-lg">
+      <motion.h1 variants={childVariants} className="text-base md:text-lg">
         {title}
       </motion.h1>
 
-      <motion.p variants={childVariants} className="text-muted-foreground">
+      <motion.p
+        variants={childVariants}
+        className="text-sm text-muted-foreground md:text-base"
+      >
         {description}
       </motion.p>
     </motion.div>

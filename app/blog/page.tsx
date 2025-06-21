@@ -27,7 +27,7 @@ export default async function BlogPage() {
             >
               <Link
                 href={`/blog/${post.slug}`}
-                className="group block space-y-4 mt-4"
+                className="group mt-4 block space-y-4"
               >
                 <h2 className="text-base transition-colors group-hover:text-primary md:text-lg">
                   {post.title}

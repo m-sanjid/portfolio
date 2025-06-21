@@ -41,13 +41,13 @@ ${message}
 
     return NextResponse.json(
       { message: "Message sent successfully" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Error sending message:", error);
     return NextResponse.json(
       { message: "Failed to send message" },
-      { status: 500 }
+      { status: 500 },
     );
   }
-} 
+}
