@@ -1,14 +1,20 @@
-"use client";
-
-import { motion } from "motion/react";
 import PageHeader from "@/components/page-header";
 import { projects } from "@/constants/projects";
 import { ArrowUpRight } from "lucide-react";
-import { useState } from "react";
 import { Link } from "next-view-transitions";
+import MotionDiv from "@/components/motion-div";
+import Tags from "@/components/tags";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Projects | Muhammed Sanjid",
+  description: "A collection of projects I've worked on. Check out my work!",
+  alternates: {
+    canonical: "/projects",
+  },
+};
 
 export default function ProjectsPage() {
-  const [hovered, setHovered] = useState<number | null>(null);
   return (
     <div className="mx-auto max-w-2xl px-4 py-20">
       <div className="space-y-8">
@@ -19,37 +25,29 @@ export default function ProjectsPage() {
 
         <div className="space-y-12">
           {projects.map((project, index) => (
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 20, filter: "blur(5px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.3, delay: index * 0.2 }}
               key={project.title}
               className="space-y-4"
-              onMouseEnter={() => setHovered(index)}
-              onMouseLeave={() => setHovered(null)}
             >
               <Link
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="group block space-y-2"
               >
-                <h2 className="text-lg">{project.title}</h2>
-                <p className="text-muted-foreground">{project.description}</p>
+                <h2 className="text-base md:text-lg">{project.title}</h2>
+                <p className="text-xs text-muted-foreground md:text-sm">
+                  {project.description}
+                </p>
               </Link>
-              <div className="flex flex-wrap gap-2">
-                {project.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="rounded-md bg-muted px-2 py-1 text-xs text-muted-foreground"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <Tags tags={project.tech} />
               <div className="flex items-center gap-4">
                 <Link
                   href={project.link}
-                  className="group inline-flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="group inline-flex items-center text-xs text-muted-foreground transition-colors hover:text-foreground md:text-sm"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -61,7 +59,7 @@ export default function ProjectsPage() {
                 {project.github && (
                   <Link
                     href={project.github}
-                    className="group inline-flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="group inline-flex items-center text-xs text-muted-foreground transition-colors hover:text-foreground md:text-sm"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -73,7 +71,7 @@ export default function ProjectsPage() {
                 )}
               </div>
               <div className="mt-8 border-b border-border" />
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
       </div>

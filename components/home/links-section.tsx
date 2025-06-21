@@ -28,7 +28,7 @@ const LinksSection = () => {
   ];
   return (
     <div className="space-y-4">
-      <h2 className="text-lg">Links</h2>
+      <h2 className="text-base md:text-lg">Links</h2>
       <ul className="space-y-2">
         {links.map((link, index) => (
           <motion.li

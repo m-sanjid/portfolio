@@ -4,6 +4,7 @@ import SectionHeader from "@/components/section-header";
 import { ArrowUpRight } from "lucide-react";
 import MotionDiv from "@/components/motion-div";
 import { Link } from "next-view-transitions";
+import Tags from "../tags";
 
 const ProjectsSection = () => {
   const project = projects.slice(0, 3);
@@ -13,11 +14,12 @@ const ProjectsSection = () => {
         title="Projects"
         description="A collection of projects I've worked on."
       />
-      <div className="space-y-8">
+      <div className="space-y-8 divide-y">
         {project.map((project, index) => (
           <MotionDiv
             initial={{ opacity: 0, y: 20, filter: "blur(5px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
             key={project.title}
             className="group"
@@ -28,29 +30,19 @@ const ProjectsSection = () => {
               href={project.link}
               className="space-y-4"
             >
-              <h2 className="mb-1 mt-4 md:mt-8 md:text-lg">{project.title}</h2>
-              <p className="text-sm font-light text-muted-foreground md:text-base">
+              <h2 className="mb-1 mt-4 text-base md:mt-8 md:text-lg">
+                {project.title}
+              </h2>
+              <p className="text-xs font-light text-muted-foreground md:text-sm">
                 {project.description}
               </p>
-              <div className="flex flex-wrap gap-2">
-                {project.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="rounded-md bg-muted px-2 py-1 text-xs text-muted-foreground"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <Tags tags={project.tech} />
               <div className="mt-2 flex items-center text-xs text-muted-foreground transition-colors hover:text-foreground">
                 <span className="underline decoration-dashed underline-offset-4">
                   View project
                 </span>
                 <ArrowUpRight className="ml-1 h-3 w-3 transition-transform duration-200 ease-in-out group-hover:translate-x-2" />
               </div>
-              {index < projects.length - 1 && (
-                <div className="mt-8 border-t border-border" />
-              )}
             </Link>
           </MotionDiv>
         ))}

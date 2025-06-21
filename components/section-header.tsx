@@ -9,8 +9,8 @@ const SectionHeader = ({
 }) => {
   return (
     <div className="my-8 space-y-2 border-b border-border pb-6">
-      <h2 className="text-lg">{title}</h2>
-      <p className="text-muted-foreground">{description}</p>
+      <h2 className="text-base md:text-lg">{title}</h2>
+      <p className="text-muted-foreground text-sm md:text-base">{description}</p>
     </div>
   );
 };

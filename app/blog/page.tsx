@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getAllBlogs } from "@/utils/mdx-server";
 import PageHeader from "@/components/page-header";
+import MotionDiv from "@/components/motion-div";
+import Tags from "@/components/tags";
 
 export default async function BlogPage() {
   const blogPosts = await getAllBlogs();
@@ -15,47 +17,41 @@ export default async function BlogPage() {
         />
 
         {/* Blog posts list */}
-        <div className="space-y-12">
+        <div className="space-y-12 divide-y">
           {blogPosts.map((post, index) => (
-            <Link
+            <MotionDiv
               key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="group block pb-4 border-b"
+              initial={{ opacity: 0, y: 20, filter: "blur(5px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
             >
-              <div
-                className="animate-fade-in space-y-2"
-                style={{ animationDelay: `${index * 100}ms` }}
+              <Link
+                href={`/blog/${post.slug}`}
+                className="group block space-y-4 mt-4"
               >
-                <h2 className="text-lg transition-colors group-hover:text-primary">
+                <h2 className="text-base transition-colors group-hover:text-primary md:text-lg">
                   {post.title}
                 </h2>
-              <p className="text-muted-foreground">{post.description}</p>
-              <div className="flex items-center text-sm text-muted-foreground">
-                <span>
-                  {post.date &&
-                    new Date(post.date).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                </span>
-                <span className="mx-2">•</span>
-                <div className="flex gap-2">
-                  {post.tags?.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-md border bg-primary/5 px-2 py-px text-xs backdrop-blur-md"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                <p className="text-xs text-muted-foreground md:text-base">
+                  {post.description}
+                </p>
+                <div className="flex items-center text-sm text-muted-foreground">
+                  <span>
+                    {post.date &&
+                      new Date(post.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                  </span>
+                  <span className="mx-2">•</span>
+                  {post.tags && <Tags tags={post.tags} />}
                 </div>
-              </div>
-            </div>
-          </Link>
+              </Link>
+            </MotionDiv>
           ))}
+        </div>
       </div>
-    </div>
     </div>
   );
 }
