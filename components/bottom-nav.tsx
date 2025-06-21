@@ -10,11 +10,27 @@ import {
   IconPalette,
 } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function BottomNav() {
   const pathname = usePathname();
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const [isNearFooter, setIsNearFooter] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const footerThreshold = 200;
+
+      setIsNearFooter(scrollPosition > documentHeight - footerThreshold);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navItems = [
     { href: "/", icon: IconHome, label: "home" },
@@ -26,7 +42,11 @@ export default function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-8 left-1/2 z-30 w-fit max-w-md -translate-x-1/2"
+      className={`fixed z-30 w-fit transition-all duration-300 ease-in-out ${
+        isNearFooter
+          ? "bottom-4 left-1/2 -translate-x-1/2 opacity-60 hover:opacity-100"
+          : "bottom-8 left-1/2 -translate-x-1/2"
+      }`}
       role="navigation"
       aria-label="Bottom navigation"
     >

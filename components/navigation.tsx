@@ -2,18 +2,34 @@
 
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import Logo from "@/components/home/logo";
 
 export default function Navigation() {
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+  const navItems = [
+    {
+      label: "Blog",
+      href: "/blog",
+    },
+    {
+      label: "Crafts",
+      href: "/craft",
+    },
+    {
+      label: "About",
+      href: "/about",
+    },
+    {
+      label: "Contact",
+      href: "/contact",
+    },
+    {
+      label: "Projects",
+      href: "/projects",
+    },
+  ];
 
   return (
     <nav
@@ -26,45 +42,23 @@ export default function Navigation() {
           <Logo />
 
           <div className="flex items-center space-x-4 text-xs font-light tracking-tight">
-            <Link
-              href="/blog"
-              className={`transition-colors duration-100 ease-in-out hover:text-primary ${
-                pathname.startsWith("/blog")
-                  ? "text-primary"
-                  : "text-muted-foreground"
-              }`}
-              aria-current={pathname.startsWith("/blog") ? "page" : undefined}
-            >
-              Blog
-            </Link>
-            <Link
-              href="/projects"
-              className={`transition-colors duration-100 ease-in-out hover:text-primary ${
-                pathname === "/projects"
-                  ? "text-primary"
-                  : "text-muted-foreground"
-              }`}
-              aria-current={pathname === "/projects" ? "page" : undefined}
-            >
-              Projects
-            </Link>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="rounded-full"
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-              aria-pressed={theme === "dark"}
-            >
-              <Sun
-                className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
-                aria-hidden="true"
-              />
-              <Moon
-                className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
-                aria-hidden="true"
-              />
-            </Button>
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`transition-colors duration-100 ease-in-out hover:text-primary ${
+                  pathname.startsWith(item.href)
+                    ? "text-primary"
+                    : "text-muted-foreground"
+                }`}
+                aria-current={
+                  pathname.startsWith(item.href) ? "page" : undefined
+                }
+              >
+                {item.label}
+              </Link>
+            ))}
+            <ThemeToggle />
           </div>
         </div>
       </div>
